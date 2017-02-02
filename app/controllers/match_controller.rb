@@ -2,7 +2,7 @@
 class MatchController < ApplicationController
   def set
 
-    body = params['body']
+    body = params['Body']
 
     # split -- first name is winner
     spl = body.split(" ")
