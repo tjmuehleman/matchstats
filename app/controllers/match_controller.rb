@@ -2,11 +2,21 @@
 class MatchController < ApplicationController
   def set
 
+    body = params['body']
+
+    # split -- first name is winner
+    spl = body.split(" ")
+
+    winner = spl[0]
+    loser = spl[1]
+
+    puts winner
+    puts loser
 
     data= {
       meta_instance_id: "uuid:#{SecureRandom::uuid}",
-      winner: "TJ",
-      loser: "Jared",
+      winner: winner,
+      loser: loser,
       date_of_match: Date.today.to_s
       }
 
