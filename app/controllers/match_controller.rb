@@ -9,8 +9,9 @@ class MatchController < ApplicationController
       date_of_match: Date.today.to_s
       }
 
+    api_token = ENV['api_token']
 
-    endpoint = "https://www.securedatakit.com/api/datasets/matches2/records/create?api_token=UKaYegEAZphzVnZtyFMsXU3LpEhwzHYzq2GPNaA8oa8gUJvvbwgagPPeXkhLvHqX"
+    endpoint = "https://www.securedatakit.com/api/datasets/matches2/records/create?api_token=#{api_token}"
 
     response = HTTParty.post(endpoint,
                          :body => data.to_json,
