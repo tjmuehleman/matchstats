@@ -12,7 +12,7 @@ class MatchController < ApplicationController
     @loser = spl[1]
 
     # if body simply says "quote" skip saving this and just pull a random quote and respond with that
-    if @winner == "quote"
+    if @winner.downcase == "quote"
       @just_quote = true
 
       @quote = get_random_quote(@loser)
