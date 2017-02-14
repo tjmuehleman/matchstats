@@ -1,7 +1,8 @@
 
 class MatchController < ApplicationController
   def set
-
+    render :layout => false
+    
     body = params['Body']
 
     # split -- first name is winner
