@@ -8,8 +8,8 @@ class MatchController < ApplicationController
     # split -- first name is winner
     spl = body.split(" ")
 
-    @winner = spl[0].downcase
-    @loser = spl[1].downcase
+    @winner = spl[0]
+    @loser = spl[1]
 
     # if body simply says "quote" skip saving this and just pull a random quote and respond with that
     if @winner == "quote"
@@ -27,8 +27,8 @@ class MatchController < ApplicationController
 
       data= {
         meta_instance_id: "uuid:#{SecureRandom::uuid}",
-        winner: @winner,
-        loser: @loser,
+        winner: @winner.downcase,
+        loser: @loser.downcase,
         date_of_match: Date.today.to_s
         }
 
