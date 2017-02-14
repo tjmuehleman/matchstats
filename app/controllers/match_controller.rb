@@ -8,27 +8,39 @@ class MatchController < ApplicationController
     # split -- first name is winner
     spl = body.split(" ")
 
-    @winner = spl[0]
-    @loser = spl[1]
-    @quote = get_random_quote(@loser)
+    @winner = spl[0].downcase
+    @loser = spl[1].downcase
 
-    puts @winner
-    puts @loser
+    # if body simply says "quote" skip saving this and just pull a random quote and respond with that
+    if @winner == "quote"
+      @just_quote = true
 
-    data= {
-      meta_instance_id: "uuid:#{SecureRandom::uuid}",
-      winner: @winner,
-      loser: @loser,
-      date_of_match: Date.today.to_s
-      }
+      @quote = get_random_quote(@loser)
 
-    api_token = ENV['api_token']
+    else
+      @just_quote = false
 
-    endpoint = "https://www.securedatakit.com/api/datasets/matches2/records/create?api_token=#{api_token}"
+      @quote = get_random_quote(@loser)
 
-    response = HTTParty.post(endpoint,
-                         :body => data.to_json,
-                         :headers => { "Content-Type" => 'application/json'})
+      puts @winner
+      puts @loser
+
+      data= {
+        meta_instance_id: "uuid:#{SecureRandom::uuid}",
+        winner: @winner,
+        loser: @loser,
+        date_of_match: Date.today.to_s
+        }
+
+      api_token = ENV['api_token']
+
+      endpoint = "https://www.securedatakit.com/api/datasets/matches2/records/create?api_token=#{api_token}"
+
+      response = HTTParty.post(endpoint,
+                           :body => data.to_json,
+                           :headers => { "Content-Type" => 'application/json'})
+
+    end
 
     render :layout => false
 

@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<%if @just_quote %>
+<Response>
+    <Message>
+      "<%=@quote%>"
+    </Message>
+</Response>
+<%else%>
 <Response>
     <Message>
       The winner is <%=@winner%>. The loser is <%=@loser%>.
       "<%=@quote%>"
     </Message>
 </Response>
+<%end%>
